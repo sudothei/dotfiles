@@ -1,0 +1,195 @@
+# ##################################################################################
+# i3 barebones
+# ##################################################################################
+
+# Necessary for i3-gaps to work properly (pixel can be any value)
+for_window [class="^.*"] border pixel 0
+
+# set workspace identifiers
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# Font for window titles.
+font pango:monospace 8
+
+# Sets mod key to Windows button
+set $mod Mod4
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+# Necessary for i3-gaps to work properly (pixel can be any value)
+for_window [class="^.*"] border pixel 0
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Are you sure you want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# ##################################################################################
+# Startup scripts
+# ##################################################################################
+
+#startup stuff
+exec --no-startup-id feh --recursive --randomize --bg-fill ~/Pictures/Wallpapers   # Wallpaper
+exec_always --no-startup-id zsh /home/paige/.config/polybar/launch.sh                  # Polybar
+exec --no-startup udiskie                                                          # Device auto-mount
+exec --no-startup-id picom --experimental-backends                                 # Compositor
+exec --no-startup-id dunst                                                         # Notifications
+exec --no-startup-id setxkbmap -option grp:alt_shift_toggle,caps:escape us,il      # Remap keyboard
+exec --no-startup-id connman-gtk
+exec --no-startup-id perl /home/paige/.config/i3/batt_alert.pl 30 10
+
+
+# ##################################################################################
+# Window Management
+# ##################################################################################
+
+# Set inner/outer gaps
+set $inner 15
+set $outer 5
+gaps inner $inner
+gaps outer $outer
+
+# toggle nogaps
+bindsym $mod+g gaps inner all set 0; gaps outer all set 0
+bindsym $mod+y gaps inner all set $inner; gaps outer all set $outer
+bindsym $mod+t floating toggle; resize set width 1080 px height 1080 px; move position 420 px 0 px
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up k
+set $down j
+set $left h
+set $right l
+
+# use Mouse1+$mod to drag floating windows
+# You can also drag with Mouse2+$mod to resize
+floating_modifier $mod
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# resize window (you can also use the mouse for that)
+bindsym $mod+r mode "resize"
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape or $mod+r
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# ##################################################################################
+# custom binds go here
+# ##################################################################################
+
+# xbacklight controls
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 10%-
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 10%+
+
+# i3lock
+bindsym $mod+Control+Delete exec "i3lock -i ~/.config/i3/lockscreen.png"
+
+# emoji
+bindsym $mod+e exec --no-startup-id "perl ~/.config/i3/emojils/emojils.pl rofi"
+
+#leetspeak
+bindsym $mod+z exec --no-startup-id "perl ~/.config/i3/1337speak/1337speak.pl rofi"
+
+# rofi
+bindsym $mod+d exec --no-startup-id "rofi -show run -i -p Applications"
+
+# screenshot
+bindsym $mod+Print exec flameshot gui
+bindsym $mod+Shift+Print exec scrot
+
+# keyboard volume controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer set Master 0%
+
+# my notes
+bindsym $mod+n exec "kitty -e nvim notes.md" 
+
+# start a terminal
+bindsym $mod+Return exec kitty
+
+# new wallpaper
+bindsym $mod+w exec --no-startup-id feh --recursive --randomize --bg-fill ~/Pictures/Wallpapers
+
+# dunst
+bindsym ctrl+shift+space exec dunstctl close-all
+bindsym ctrl+space exec dunstctl close
+bindsym ctrl+grave exec dunstctl history-pop
+bindsym ctrl+shift+period exec dunstctl context

@@ -1,0 +1,20 @@
+{
+  "suggest.echodocSupport": true,
+  "suggest.maxCompleteItemCount": 20,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "javascript",
+    "javascriptreact",
+    "json"
+  ],
+  // "eslint.filetypes": ["javascript", "javascriptreact"],
+  // "eslint.packageManager": "npm",
+  "diagnostic.errorSign": "🔥",
+  "diagnostic.warningSign": "👉",
+  "diagnostic.infoSign": "🔧",
+  "diagnostic.hintSign": "*",
+  "javascript.suggestionActions.enabled": false,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextPrefix": " ---> ",
+  //"diagnostic.enableMessage": "jump",
+  "codeLens.enable": true
+}
