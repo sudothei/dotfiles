@@ -1,4 +1,4 @@
-# ##################################################################################
+####################################################################################
 # i3 barebones
 # ##################################################################################
 
@@ -64,14 +64,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Are you sure you want to exi
 # ##################################################################################
 
 #startup stuff
-exec --no-startup-id feh --recursive --randomize --bg-fill ~/Pictures/Wallpapers   # Wallpaper
-exec_always --no-startup-id zsh /home/paige/.config/polybar/launch.sh                  # Polybar
-exec --no-startup udiskie                                                          # Device auto-mount
-exec --no-startup-id picom --experimental-backends                                 # Compositor
-exec --no-startup-id dunst                                                         # Notifications
-exec --no-startup-id setxkbmap -option grp:alt_shift_toggle,caps:escape us,il      # Remap keyboard
-exec --no-startup-id connman-gtk
-exec --no-startup-id perl /home/paige/.config/i3/batt_alert.pl 30 10
+exec --no-startup-id feh --recursive --randomize --bg-fill ~/Pictures/Wallpapers                        # Wallpaper
+exec_always --no-startup-id zsh /home/paige/.config/polybar/launch.sh                                   # Polybar
+exec_always --no-startup udiskie                                                                        # Device auto-mount
+exec_always --no-startup-id picom -b --experimental-backends --backend glx --blur-method gaussian       # Compositor
+exec_always --no-startup-id dunst                                                                       # Notifications
+exec_always --no-startup-id setxkbmap -option grp:alt_shift_toggle,caps:escape us,il                    # Remap keyboard
+exec_always --no-startup-id /home/paige/.config/i3/batt_alert/batt_alert                                # battery alert
 
 
 # ##################################################################################
