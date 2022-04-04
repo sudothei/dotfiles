@@ -69,8 +69,3 @@ fi
 
 # Enable backwards history search
 bindkey '^R' history-incremental-search-backward
-
-
-# eval "$(rbenv init -)"
-
-source ~/secrets.sh
