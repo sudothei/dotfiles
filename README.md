@@ -1,11 +1,16 @@
 # Paige's personal dotfiles
-I use these to quickly setup new daily machines the way I like.  
-It's really not finished, but I have it here for convenience.  
-I keep a bash script here to automate the stuff I normally do on a fresh install.  
-Stuff in here will change constantly though, but I keep it around.  
+
+I simply run `./autosetup.sh` and am done with setting up a machine.
+
+Important note: This repo is currently being modified and is very unstable.
 
 **Terminal Emulator:** Kitty  
 **Shell:** Zsh  
-**WM:** i3 (gonna switch to xmonad eventually)  
+**WM:** dwm  
 **Distro:** Arch  
 **Editor:** neoVim
+
+## TODO
+
+- update dunst config
+- update xinitrc
