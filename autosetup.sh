@@ -2,7 +2,8 @@
 
 yay -S                 \
 connman-gtk            \
-paperview-git
+paperview-git          \
+xwinwrap-git
 
 sudo pacman -S         \
 flameshot              \
