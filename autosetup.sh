@@ -1,28 +1,36 @@
 #!/bin/bash
 
-yay -S \
-lightcord
-connman-gtk
-simplescreenrecorder
-flameshot
+yay -S                 \
+connman-gtk            
 
-## sets up nvidia stuff
+sudo pacman -S         \
+flameshot              \
+dunst                  \
+neovim                 \
+python-pip             \
+iwd
 
-sudo echo 'options nvidia "NVreg_DynamicPowerManagement=0x02"' | sudo tee /etc/modprobe.d/nvidia.conf
+git clone git@github.com:sudothei/dwm.git
+git clone git@github.com:sudothei/emojils.pl.git
+git clone git@github.com:sudothei/ivrit_status.git
+git clone git@github.com:sudothei/dmenu.git
 
-sudo echo '''
-# Enable runtime PM for NVIDIA VGA/3D controller devices on driver bind
-ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="auto"
-ACTION=="bind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="auto"
+cd dwm
+sudo make clean install
+cd ..
 
-# Disable runtime PM for NVIDIA VGA/3D controller devices on driver unbind
-ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030000", TEST=="power/control", ATTR{power/control}="on"
-ACTION=="unbind", SUBSYSTEM=="pci", ATTR{vendor}=="0x10de", ATTR{class}=="0x030200", TEST=="power/control", ATTR{power/control}="on"
-''' | sudo tee /etc/udev/rules.d/80-nvidia-pm.rules
+cd dmenu
+sudo make clean install
+cd ..
 
-## assigns correct monitor to polybar config and launch.sh
+cd ivrit_status
+sudo make clean install
+cd ..
 
-monitor=$(xrandr -q | grep primary | sed 's/ .*//g' | cat /dev/stdin)
+cd emojils.pl
+chmod +x install.sh
+sudo ./install.sh
+cd ..
 
 ## used for neovim plugins
 
@@ -34,18 +42,6 @@ pip install neovim
 xdg-mime default brave.desktop x-scheme-handler/http
 xdg-mime default brave.desktop x-scheme-handler/htts
 xdg-settings set default-web-browser brave.desktop      
-
-## I keep forgetting to add this TODO
-
-hideit.sh
-
-## irc nick setup I need to make a script for doing to all servers
-
-/set irc.server.undernet.nicks "PaigeParity,Parity,PaigeP,pParity,p4163p4r17y"
-/set irc.server.undernet.username "Paige Parity"
-/set irc.server.undernet.sasl_username "paigeparity"
-/set irc.server.undernet.sasl_password "xxxxxxx"
-/set irc.server.undernet.command "/msg nickserv identify xxxxxxx"
 
 ## configures iwd instead of wpa_supplicant or NetworkMangler
 
@@ -109,7 +105,7 @@ rm strap.sh
  cp -R -u dotfiles ~
 
 
- # To install vim plugin
+ # To install vim plugins
 
 git clone https://github.com/preservim/nerdcommenter.git ~/.config/nvim/pack/plugins/start/nerdcommenter
 git clone https://github.com/Valloric/MatchTagAlways.git ~/.config/nvim/pack/plugins/start/matchtagalways
