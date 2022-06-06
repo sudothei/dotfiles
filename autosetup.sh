@@ -32,6 +32,10 @@ chmod +x install.sh
 sudo ./install.sh
 cd ..
 
+rm -rf dwm dmenu ivrit_status emojils.pl
+
+sudo cp dmenu_run_history /usr/local/bin
+
 ## used for neovim plugins
 
 npm install -g neovim
