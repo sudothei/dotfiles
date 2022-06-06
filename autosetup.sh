@@ -1,7 +1,8 @@
 #!/bin/bash
 
 yay -S                 \
-connman-gtk            
+connman-gtk            \
+paperview-git
 
 sudo pacman -S         \
 flameshot              \
@@ -14,6 +15,14 @@ git clone git@github.com:sudothei/dwm.git
 git clone git@github.com:sudothei/emojils.pl.git
 git clone git@github.com:sudothei/ivrit_status.git
 git clone git@github.com:sudothei/dmenu.git
+
+# preparing background gif for paperview
+
+mkdir ~/Pictures/scene
+cp scene.gif ~/Pictures/scene
+convert -coalesce ~/Pictures/scene/scene.gif ~/Pictures/scene/scene.bmp
+
+# installing custom binaries
 
 cd dwm
 sudo make clean install
