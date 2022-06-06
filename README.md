@@ -9,8 +9,3 @@ Important note: This repo is currently being modified and is very unstable.
 **WM:** dwm  
 **Distro:** Arch  
 **Editor:** neoVim
-
-## TODO
-
-- update dunst config
-- update xinitrc
