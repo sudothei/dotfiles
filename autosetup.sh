@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# installing packages
+
 yay -S                 \
 connman-gtk            \
 paperview-git
@@ -9,12 +11,9 @@ flameshot              \
 dunst                  \
 neovim                 \
 python-pip             \
-iwd
-
-git clone git@github.com:sudothei/dwm.git
-git clone git@github.com:sudothei/emojils.pl.git
-git clone git@github.com:sudothei/ivrit_status.git
-git clone git@github.com:sudothei/dmenu.git
+python                 \
+gdb                    \
+zsh
 
 # preparing background gif for paperview
 
@@ -23,6 +22,12 @@ cp scene.gif ~/Pictures/scene
 convert -coalesce ~/Pictures/scene/scene.gif ~/Pictures/scene/scene.bmp
 
 # installing custom binaries
+
+git clone https://github.com/sudothei/dwm.git
+git clone https://github.com/sudothei/emojils.pl.git
+git clone https://github.com/sudothei/ivrit_status.git
+git clone https://github.com/sudothei/dmenu.git
+git clone https://github.com/sudothei/batt_alert.git
 
 cd dwm
 sudo make clean install
@@ -41,9 +46,13 @@ chmod +x install.sh
 sudo ./install.sh
 cd ..
 
+cd batt_alert
+sudo make clean install
+cd ..
+
 rm -rf dwm dmenu ivrit_status emojils.pl
 
-sudo cp dmenu_run_history /usr/local/bin
+sudo mv dmenu_run_history /usr/local/bin
 
 ## used for neovim plugins
 
@@ -56,42 +65,11 @@ xdg-mime default brave.desktop x-scheme-handler/http
 xdg-mime default brave.desktop x-scheme-handler/htts
 xdg-settings set default-web-browser brave.desktop      
 
-## configures iwd instead of wpa_supplicant or NetworkMangler
-
-sudo cp iwd.service connman_iwd.service /etc/systemd/system/
-sudo systemctl disable NetworkManager
-sudo systemctl disable wpa_supplicant
-sudo systemctl stop NetworkManager
-sudo systemctl stop wpa_supplicant
-sudo systemctl enable iwd.service
-sudo systemctl start iwd.service
-sudo systemctl enable connman
-sudo systemctl start connman
-sudo systemctl disable lightdm
-sudo systemctl enable nodm
-
 # GDB GEF
 wget -q -O- https://github.com/hugsy/gef/raw/master/scripts/gef.sh | sh
 
-## TODO enable and install blackarch
-
-sudo pacman -Sy overwrite \* blackarch
-
-## TODO
-## configure /etc/nodm.conf
-
-# TO-DO
-# Make grub style happen automatically
-#- New environment:
-  #- Buildscript for setup
-  #- Manjaro
-  #- iwd > networkmangler
-  #- connman
-  #- grub
-  #- zsh
-  #- rebind CAPS
-  #- config file's pci devices rewritten by script
-  #- autoinstall browser extensions
+# zsh
+chsh -s $(which zsh)
 
 # Prompt to install sudo first
 read -p "Please install sudo and setup sudoers first"
@@ -107,18 +85,17 @@ chmod +x strap.sh
 sudo ./strap.sh
 rm strap.sh
 
- # To move stuff around
- cd ~
- sudo rm .profile
- sudo chown -R paige dotfiles
- cd dotfiles
- rm .git
- rm README.md
- cd ~
- cp -R -u dotfiles ~
+# To put files in ~
+sudo rm ~.profile
+sudo chown -R paige .
+rm -rf .git
+rm README.md
+cp -R -u . ~
 
+# To install fonts
+sudo mv -R u ~/fonts /usr/share
 
- # To install vim plugins
+# To install vim plugins
 
 git clone https://github.com/preservim/nerdcommenter.git ~/.config/nvim/pack/plugins/start/nerdcommenter
 git clone https://github.com/Valloric/MatchTagAlways.git ~/.config/nvim/pack/plugins/start/matchtagalways
