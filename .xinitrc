@@ -3,5 +3,6 @@ batt_alert &
 ivrit_status &
 dunst &
 udiskie &
-paperview ~/Pictures/scene 10 &
+picom &
+xwinwrap -d -b -s -fs -st -sp -nf -ov -fdt -- gifview -w WID ~/Pictures/scene.gif -a
 exec dwm

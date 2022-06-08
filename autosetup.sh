@@ -4,7 +4,8 @@
 
 yay -S                 \
 connman-gtk            \
-paperview-git
+paperview-git          \
+xwinwrap-git
 
 sudo pacman -S         \
 flameshot              \
@@ -15,11 +16,6 @@ python                 \
 gdb                    \
 zsh
 
-# preparing background gif for paperview
-
-mkdir ~/Pictures/scene
-cp scene.gif ~/Pictures/scene
-convert -coalesce ~/Pictures/scene/scene.gif ~/Pictures/scene/scene.bmp
 
 # installing custom binaries
 
@@ -86,6 +82,7 @@ sudo ./strap.sh
 rm strap.sh
 
 # To put files in ~
+cp scene.gif ~/Pictures
 sudo rm ~.profile
 sudo chown -R paige .
 rm -rf .git
