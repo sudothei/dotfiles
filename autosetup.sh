@@ -4,8 +4,7 @@
 
 yay -S                 \
 connman-gtk            \
-paperview-git          \
-xwinwrap-git
+paperview-git
 
 sudo pacman -S         \
 flameshot              \
@@ -17,6 +16,13 @@ gdb                    \
 zsh                    \
 gifsicle
 
+# installing xwinwrap
+
+git clone https://github.com/mmhobi7/xwinwrap.git
+cd xwinwrap
+sudo make clean install
+cd ..
+rm -rf xwinwrap
 
 # installing custom binaries
 
