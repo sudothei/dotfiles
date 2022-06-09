@@ -14,7 +14,8 @@ neovim                 \
 python-pip             \
 python                 \
 gdb                    \
-zsh
+zsh                    \
+gifsicle
 
 
 # installing custom binaries
