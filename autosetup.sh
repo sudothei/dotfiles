@@ -1,5 +1,7 @@
 #!/bin/bash
 
+username=$(id -un)
+
 # installing packages
 
 yay -S                 \
@@ -91,7 +93,7 @@ rm strap.sh
 # To put files in ~
 cp scene.gif ~/Pictures
 sudo rm ~.profile
-sudo chown -R paige .
+sudo chown -R $username .
 rm -rf .git
 rm README.md
 cp -R -u . ~
