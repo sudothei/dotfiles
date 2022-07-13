@@ -16,7 +16,13 @@ python-pip             \
 python                 \
 gdb                    \
 zsh                    \
-gifsicle
+gifsicle               \
+rustup                 \
+cargo
+
+# setting up rust dev environment
+
+rustup component add rls rust-analysis rust-src
 
 # installing xwinwrap
 
@@ -126,4 +132,4 @@ nvim -u NONE -c "helptags ~/.config/nvim/pack/plugins/start/vim-instant-markdown
 nvim -u NONE -c "helptags ~/.config/nvim/pack/plugins/start/vim-css-color/doc" -c q
 nvim -u NONE -c "helptags ~/.config/nvim/pack/plugins/start/greplace/doc" -c q
 sudo npm -g install instant-markdown-d 
-nvim -c 'CocInstall -sync coc-json coc-html coc-python coc-eslint coc-snippets coc-phpls coc-texlab coc-markdownlint coc-css coc-prettier coc-tsserver|q coc-java'
+nvim -c 'CocInstall -sync coc-json coc-html coc-python coc-eslint coc-snippets coc-phpls coc-texlab coc-markdownlint coc-css coc-prettier coc-tsserver coc-rls|q coc-java'
